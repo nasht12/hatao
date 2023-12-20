@@ -20,7 +20,7 @@ export function NavigationMenuDemo() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Campaigns</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[200px] lg:w-[200px] lg:grid-rows-[1fr_1fr]">
               <li className="row-span-3 bg-blue-300 rounded-md">
