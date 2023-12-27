@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { NavigationMenuDemo } from '../components/nav';
+import Header from '@/components/header';
+import { Sidebar } from '@/components/sidebar';
+import { categories } from '@/data/categories';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,10 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-hidden`}>
-      <NavigationMenuDemo />
-      {children}
+      <body className={`${inter.className} overflow-hidden flex`}>
+        <Sidebar categories={categories} className="w-full md:w-64"/>
+        <main className="w-full flex-grow">
+          {children}
+        </main>
       </body>
     </html>
-  )
+  );
 }

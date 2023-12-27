@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-// import { Icons } from "@/components/icons"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,13 +13,14 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { BsList } from "react-icons/bs";
 
 export function NavigationMenuDemo() {
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Campaigns</NavigationMenuTrigger>
+          <NavigationMenuTrigger><BsList /></NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[200px] lg:w-[200px] lg:grid-rows-[1fr_1fr]">
               <li className="row-span-3 bg-blue-300 rounded-md">
@@ -31,11 +31,8 @@ export function NavigationMenuDemo() {
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      Restaurants
+                      Cuisine
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                        Can&apos;t decide where to eat? Let us make it fun!
-                    </p>
                   </a>
                 </NavigationMenuLink>
               </li>
@@ -47,12 +44,8 @@ export function NavigationMenuDemo() {
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      Trips
+                      Places
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
                   </a>
                 </NavigationMenuLink>
               </li>

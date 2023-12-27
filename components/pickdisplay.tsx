@@ -208,17 +208,9 @@ export default function PicksDisplay() {
   return (
     <div className="flex flex-row gap-4">
       {picks.map((pick, index) => (
-        <motion.div
-          key={pick.imageSrc}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          whileHover={{ scale: [null, 1.12, 1.1] }}
-          transition={{ duration: 0.3 }}
-          onClick={() => handleImageClick(index)}
-        >
+        <div key={pick.imageSrc} onClick={() => handleImageClick(index)}>
           {(index === finalClickedIndex || !allPicksShown) && <Pick imageSrc={pick.imageSrc} keywords={pick.keywords} />}
-        </motion.div>
+        </div>
       ))}
       {allPicksShown && <Confetti width={width} height={height} />}
     </div>
