@@ -21,9 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-hidden flex`}>
-        <Sidebar categories={categories} className="w-full md:w-64"/>
-        <main className="w-full flex-grow">
+      <body className={`${inter.className} grid`}>
+        {/* <Sidebar categories={categories} className="w-full md:w-64"/> */}
+        <main className="w-full flex-grow grid place-items-center">
           {children}
         </main>
       </body>

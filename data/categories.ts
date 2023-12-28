@@ -3,7 +3,7 @@ export type Category = (typeof categories)[number]
 export const categories = [
   "Entertainment",
   "Sports",
-  "Travel",
+  "Places",
   "Food and Drink",
   "Technology",
   "Literature",

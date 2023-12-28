@@ -22,13 +22,11 @@ function DemoContainer({
 }
 
 export default function CreatePage() {
-
   return (
-    <div className="hidden items-start justify-center gap-6 rounded-lg p-8 md:grid lg:grid-cols-2 xl:grid-cols-3 overflow-auto h-screen">
-      {/* {!isCampaignCreated ? ( */}
-      <DemoContainer className="overflow-auto">
+    <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+    {/* <DemoContainer className="overflow-auto"> */}
         <CreateCampaign />
-      </DemoContainer>
+      {/* </DemoContainer> */}
     </div>
   );
 }

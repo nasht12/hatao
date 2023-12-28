@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/select";
 import Link from "next/link";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { DrawerDemo } from "@/app/unsplash/components/image-drawer";
 
 const formSchema = z.object({
   category: z.string().nonempty({ message: "Category is required." }),
@@ -63,7 +64,7 @@ export default function CreateCampaign() {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, prepend, remove } = useFieldArray({
     control: form.control,
     name: "items",
   });
@@ -81,7 +82,7 @@ export default function CreateCampaign() {
           {isAddClicked ? campName : "Create Campaign"}
         </CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-6">
+      <CardContent className="grid gap-6 overflow-auto">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             {!isAddClicked && (
@@ -173,52 +174,56 @@ export default function CreateCampaign() {
               <>
                 <Button
                   type="button"
-                  onClick={() => append({ name: "", url: "" })}
-                  className="flex-1 mr-4"
+                  onClick={() => prepend({ name: "", url: "" })}
+                  className="focus:outline-none w-14 h-10 hover:w-16 transition-all duration-200"
                 >
                   Add
                 </Button>
                 {fields.map((field, index) => (
-                  <div key={field.id} className="flex mr-4">
-                    <FormItem className="mr-2">
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...form.register(
-                            `items[${index}].name` as `items.${number}.name`
-                          )}
-                          className="p-2 border rounded-md"
-                          placeholder="Name"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                    <FormItem className="mr-2">
-                      <FormLabel>URL</FormLabel>
-                      <FormControl>
-                        <Input
+                  <div key={field.id} className="flex items-center">
+                      <FormItem className="mr-2">
+                        {/* <FormLabel>Name</FormLabel> */}
+                        <FormControl>
+                          <Input
+                            {...form.register(
+                              `items[${index}].name` as `items.${number}.name`
+                            )}
+                            className="p-2 border rounded-md"
+                            placeholder="Name"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                      <FormItem className="ml-2">
+                        {/* <FormLabel>URL</FormLabel> */}
+                        <FormControl>
+                          {/* <Input
                           {...form.register(
                             `items[${index}].url` as `items.${number}.url`
                           )}
                           className="p-2 border rounded-md"
                           placeholder="URL"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
+                        /> */}
+                          <DrawerDemo />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    <div>
                     <Button
                       type="button"
                       onClick={() => remove(index)}
-                      className="mt-8 "
+                      className="mt-8 ml-2"
+                      disabled={fields.length === 1}
                     >
                       Remove
                     </Button>
+                    </div>
                   </div>
                 ))}
                 <Button
                   onClick={() => setIsAddClicked(false)}
                   title="Back"
-                  className="focus:outline-none"
+                  className="focus:outline-none "
                 >
                   <IoIosArrowRoundBack className="w-6 h-6 hover:w-8 transition-all duration-200" />
                 </Button>
