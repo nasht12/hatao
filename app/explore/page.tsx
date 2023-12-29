@@ -1,29 +1,24 @@
-import { Metadata } from "next"
-import Image from "next/image"
-import { PlusCircledIcon } from "@radix-ui/react-icons"
-import { Button } from "@/components/ui/button"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-
-import { AlbumArtwork } from "./components/album-artwork"
-import { Menu } from "./components/menu"
-import { PodcastEmptyPlaceholder } from "./components/podcast-empty-placeholder"
-import { Sidebar } from "./components/sidebar"
-import { listenNowAlbums, madeForYouAlbums } from "./data/albums"
-import { playlists } from "./data/playlists"
+import { Metadata } from "next";
+import Image from "next/image";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AlbumArtwork } from "./components/album-artwork";
+import { Menu } from "./components/menu";
+import { PodcastEmptyPlaceholder } from "./components/podcast-empty-placeholder";
+import { Sidebar } from "./components/sidebar";
+import { listenNowAlbums, madeForYouAlbums } from "./data/albums";
+import { playlists } from "./data/playlists";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Rank App",
   description: "Rank lists from different topics",
-}
+};
 
-export default function MusicPage() {
+export default function ExplorePage() {
   return (
     <>
       <div className="hidden md:block">
@@ -38,17 +33,21 @@ export default function MusicPage() {
                     <div className="space-between flex items-center">
                       <TabsList>
                         <TabsTrigger value="music" className="relative">
-                          Music
+                          Tab1
                         </TabsTrigger>
-                        <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
+                        <TabsTrigger value="podcasts">Tab2</TabsTrigger>
                         <TabsTrigger value="live" disabled>
                           Live
                         </TabsTrigger>
                       </TabsList>
                       <div className="ml-auto mr-4">
                         <Button>
-                          <PlusCircledIcon className="mr-2 h-4 w-4" />
-                          Add music
+                          <Link href="create">
+                            <div className="flex items-center">
+                              <PlusCircledIcon className="mr-2 h-4 w-4" />
+                              Add List
+                            </div>
+                          </Link>
                         </Button>
                       </div>
                     </div>
@@ -71,14 +70,15 @@ export default function MusicPage() {
                         <ScrollArea>
                           <div className="flex space-x-4 pb-4">
                             {listenNowAlbums.map((album) => (
-                              <AlbumArtwork
-                                key={album.name}
-                                album={album}
-                                className="w-[250px]"
-                                aspectRatio="portrait"
-                                width={250}
-                                height={330}
-                              />
+                              <Link key={album.name} href={`/lists/${encodeURIComponent(album.name)}`}>                                <AlbumArtwork
+                                  key={album.name}
+                                  album={album}
+                                  className="w-[250px]"
+                                  aspectRatio="portrait"
+                                  width={250}
+                                  height={330}
+                                />
+                                </Link>
                             ))}
                           </div>
                           <ScrollBar orientation="horizontal" />
@@ -136,5 +136,5 @@ export default function MusicPage() {
         </div>
       </div>
     </>
-  )
+  );
 }

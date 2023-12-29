@@ -6,28 +6,34 @@ export interface Album {
   
   export const listenNowAlbums: Album[] = [
     {
-      name: "React Rendezvous",
-      artist: "Ethan Byte",
+      name: "Favorite Asian Restaurants - Seattle",
+      artist: "Food",
       cover:
-        "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
+        "https://images.unsplash.com/photo-1516905365385-7f89706faaf8?w=300&dpr=2&q=80",
     },
     {
-      name: "Async Awakenings",
-      artist: "Nina Netcode",
+      name: "Day Trips from Seattle",
+      artist: "Travel",
       cover:
-        "https://images.unsplash.com/photo-1468817814611-b7edf94b5d60?w=300&dpr=2&q=80",
+        "https://images.unsplash.com/photo-1627844718626-4c6b963baac0?w=300&dpr=2&q=80",
     },
     {
-      name: "The Art of Reusability",
-      artist: "Lena Logic",
+      name: "Movie of the Year - 2023",
+      artist: "Art and Design",
       cover:
-        "https://images.unsplash.com/photo-1528143358888-6d3c7f67bd5d?w=300&dpr=2&q=80",
+        "https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=300&dpr=2&q=80",
     },
     {
-      name: "Stateful Symphony",
-      artist: "Beth Binary",
+      name: "Best Christmas Songs",
+      artist: "Music",
       cover:
-        "https://images.unsplash.com/photo-1490300472339-79e4adc6be4a?w=300&dpr=2&q=80",
+        "https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=300&dpr=2&q=80",
+    },
+    {
+      name: "Day Trips from Seattle",
+      artist: "Travel",
+      cover:
+        "https://images.unsplash.com/photo-1627844718626-4c6b963baac0?w=300&dpr=2&q=80",
     },
   ]
   

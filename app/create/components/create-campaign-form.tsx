@@ -33,6 +33,7 @@ import {
 import Link from "next/link";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { DrawerDemo } from "@/app/unsplash/components/image-drawer";
+import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
   category: z.string().nonempty({ message: "Category is required." }),
@@ -52,6 +53,7 @@ type FormData = z.infer<typeof formSchema>;
 export default function CreateCampaign() {
   const [campName, setCampName] = useState("");
   const [isAddClicked, setIsAddClicked] = useState(false);
+  const [selectedUrl, setSelectedUrl] = useState('');
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -175,12 +177,14 @@ export default function CreateCampaign() {
                 <Button
                   type="button"
                   onClick={() => prepend({ name: "", url: "" })}
-                  className="focus:outline-none w-14 h-10 hover:w-16 transition-all duration-200"
+                  className="focus:outline-none w-14 h-10 hover:w-16 transition-all duration-100"
+                  title="Add"
                 >
-                  Add
+                  <PlusIcon />
                 </Button>
                 {fields.map((field, index) => (
-                  <div key={field.id} className="flex items-center">
+                  <div key={field.id} className="flex items-center ">
+                    <div>
                       <FormItem className="mr-2">
                         {/* <FormLabel>Name</FormLabel> */}
                         <FormControl>
@@ -194,6 +198,8 @@ export default function CreateCampaign() {
                         </FormControl>
                         <FormMessage />
                       </FormItem>
+                    </div>
+                    <div>
                       <FormItem className="ml-2">
                         {/* <FormLabel>URL</FormLabel> */}
                         <FormControl>
@@ -204,19 +210,22 @@ export default function CreateCampaign() {
                           className="p-2 border rounded-md"
                           placeholder="URL"
                         /> */}
-                          <DrawerDemo />
+                          <Input value={selectedUrl} readOnly />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
-                    <div>
-                    <Button
-                      type="button"
-                      onClick={() => remove(index)}
-                      className="mt-8 ml-2"
-                      disabled={fields.length === 1}
-                    >
-                      Remove
-                    </Button>
+                      <DrawerDemo onUrlSelect={setSelectedUrl}/>
+                    </div>
+                    <div className="relative">
+                      <Button
+                        type="button"
+                        onClick={() => remove(index)}
+                        className="ml-2 hover:"
+                        disabled={fields.length === 1}
+                        title="Remove"
+                      >
+                        <MinusIcon />
+                      </Button>
                     </div>
                   </div>
                 ))}

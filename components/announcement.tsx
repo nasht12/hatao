@@ -12,7 +12,7 @@ export function Announcement() {
       🔥 <Separator className="mx-2 h-4" orientation="vertical" />{" "}
       <span className="sm:hidden">Learn more.</span>
       <span className="hidden sm:inline">
-        Create, Explore, Rank and more.
+        Create, Rank and more
       </span>
       <ArrowRightIcon className="ml-1 h-4 w-4" />
     </Link>

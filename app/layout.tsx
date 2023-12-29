@@ -5,6 +5,7 @@ import { NavigationMenuDemo } from '../components/nav';
 import Header from '@/components/header';
 import { Sidebar } from '@/components/sidebar';
 import { categories } from '@/data/categories';
+import { SiteHeader } from '@/components/site-header';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} grid`}>
+        <SiteHeader />
         {/* <Sidebar categories={categories} className="w-full md:w-64"/> */}
         <main className="w-full flex-grow grid place-items-center">
           {children}

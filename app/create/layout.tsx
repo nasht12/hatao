@@ -20,7 +20,7 @@ export default function ExamplesLayout({ children }: ExamplesLayoutProps) {
       <div className="container relative">
         <section>
           {/* <ExamplesNav /> */}
-          <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow-md md:shadow-xl">
+          <div className="overflow-hidden m-4 rounded-[0.5rem] border bg-background shadow-md md:shadow-xl">
             {children}
           </div>
         </section>

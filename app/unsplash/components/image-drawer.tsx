@@ -13,6 +13,8 @@ import {
 import { createApi } from "unsplash-js";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import { CheckIcon } from '@radix-ui/react-icons'
+
 
 type Photo = {
   id: string;
@@ -21,11 +23,15 @@ type Photo = {
   };
 };
 
+interface DrawerDemoProps {
+  onUrlSelect: (url: string) => void;
+}
+
 const api = createApi({
   accessKey: process.env.NEXT_PUBLIC_ACCESS_KEY || "",
 });
 
-export function DrawerDemo() {
+export function DrawerDemo({ onUrlSelect }: DrawerDemoProps) {
   const [query, setQuery] = useState("");
   const [data, setData] = useState<{
     response: { results: Photo[] };
@@ -33,6 +39,11 @@ export function DrawerDemo() {
   } | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+
+  const handleUrlSelect = (url: string) => {
+    // ...existing code...
+    onUrlSelect(url);
+  };
 
   const searchPhotos = () => {
     api.search
@@ -46,12 +57,13 @@ export function DrawerDemo() {
       });
   };
 
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline">
           {" "}
-          {selectedImageUrl ? "set" : "Add Image URL"}
+          {selectedImageUrl ? <CheckIcon /> : "Add Image URL"}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
@@ -62,12 +74,12 @@ export function DrawerDemo() {
               Search for images from Unsplash.
             </DrawerDescription>
           </DrawerHeader>
-          <div className="p-4 pb-0">
+          <div className="p-4 pb-0 flex">
             <Input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="mb-4"
+              className="mr-4"
             />
             <Button onClick={searchPhotos}>Search</Button>
           </div>
@@ -84,11 +96,13 @@ export function DrawerDemo() {
                 }`}
                 onClick={() => {
                   setSelectedImageUrl(photo.urls.regular);
+                  handleUrlSelect(photo.urls.regular);
                   setSelectedImageId(photo.id);
                 }}
               />
             ))}
           </div>
+          <div className="h-8"></div> 
         </div>
       </DrawerContent>
     </Drawer>
