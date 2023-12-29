@@ -12,6 +12,7 @@ import { Sidebar } from "./components/sidebar";
 import { listenNowAlbums, madeForYouAlbums } from "./data/albums";
 import { playlists } from "./data/playlists";
 import Link from "next/link";
+import { generateSlug } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Rank App",
@@ -70,7 +71,7 @@ export default function ExplorePage() {
                         <ScrollArea>
                           <div className="flex space-x-4 pb-4">
                             {listenNowAlbums.map((album) => (
-                              <Link key={album.name} href={`/lists/${encodeURIComponent(album.name)}`}>                                <AlbumArtwork
+                              <Link key={album.name} href={`/lists/${generateSlug(album.name)}`}>                                <AlbumArtwork
                                   key={album.name}
                                   album={album}
                                   className="w-[250px]"

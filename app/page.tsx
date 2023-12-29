@@ -1,4 +1,4 @@
-import PicksDisplay from "@/components/pickdisplay";
+import PicksDisplay from "@/app/lists/components/pickdisplay";
 import {
   PageActions,
   PageHeader,

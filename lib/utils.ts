@@ -5,6 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function generateSlug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 type Category =
   | "phones"
   | "laptops"
@@ -167,3 +171,5 @@ export function getKeywords(category: Category): string[] {
       return [];
   }
 }
+
+
