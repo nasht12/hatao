@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/select";
 import Link from "next/link";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { DrawerDemo } from "@/app/unsplash/components/image-drawer";
+import { DrawerDemo } from "@/app/create/components/image-drawer";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
@@ -53,7 +53,9 @@ type FormData = z.infer<typeof formSchema>;
 export default function CreateCampaign() {
   const [campName, setCampName] = useState("");
   const [isAddClicked, setIsAddClicked] = useState(false);
-  const [selectedUrl, setSelectedUrl] = useState('');
+  const [isUrlSelected, setIsUrlSelected] = useState<boolean[]>([false]);
+  const [selectedUrl, setSelectedUrl] = useState("");
+  const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -176,7 +178,11 @@ export default function CreateCampaign() {
               <>
                 <Button
                   type="button"
-                  onClick={() => prepend({ name: "", url: "" })}
+                  onClick={() => {
+                    prepend({ name: "", url: "" }),
+                      setSelectedUrls([...selectedUrls, ""]);
+                      setIsUrlSelected([...isUrlSelected, false]);
+                  }}
                   className="focus:outline-none w-14 h-10 hover:w-16 transition-all duration-100"
                   title="Add"
                 >
@@ -210,11 +216,24 @@ export default function CreateCampaign() {
                           className="p-2 border rounded-md"
                           placeholder="URL"
                         /> */}
-                          <Input value={selectedUrl} readOnly />
+                          {/* <Input value={selectedUrl} readOnly /> */}
+                          {isUrlSelected[index] ? (
+                            <Input value={selectedUrls[index]} readOnly />
+                          ) : (
+                            <DrawerDemo
+                              onUrlSelect={(url) => {
+                                const newUrls = [...selectedUrls];
+                                newUrls[newUrls.length - 1] = url;
+                                setSelectedUrls(newUrls);
+                                const newIsUrlSelected = [...isUrlSelected];
+                                newIsUrlSelected[newIsUrlSelected.length - 1] = true;
+                                setIsUrlSelected(newIsUrlSelected);                              }}
+                            />
+                          )}
                         </FormControl>
                         <FormMessage />
                       </FormItem>
-                      <DrawerDemo onUrlSelect={setSelectedUrl}/>
+                      {/* <DrawerDemo onUrlSelect={setSelectedUrl}/> */}
                     </div>
                     <div className="relative">
                       <Button

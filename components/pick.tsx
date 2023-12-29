@@ -5,10 +5,10 @@ import BadgesCard from "../components/badgescard";
 
 interface PickProps {
   imageSrc: string;
-  keywords: { [keyword: string]: string };
+  // keywords: { [keyword: string]: string };
 }
 
-export default function Pick({ imageSrc, keywords }: PickProps) {
+export default function Pick({ imageSrc }: PickProps) {
   return (
     <div className="p-2 bg-gray-200 rounded-lg shadow-xl flex flex-col md:flex-row w-full md:w-120 h-180">
       <motion.div

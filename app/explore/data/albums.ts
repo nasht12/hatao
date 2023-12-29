@@ -6,7 +6,7 @@ export interface Album {
   
   export const listenNowAlbums: Album[] = [
     {
-      name: "Favorite Asian Restaurants - Seattle",
+      name: "Favorite Restaurants - Seattle",
       artist: "Food",
       cover:
         "https://images.unsplash.com/photo-1516905365385-7f89706faaf8?w=300&dpr=2&q=80",

@@ -12,18 +12,20 @@ export function SiteHeader() {
         {/* <MainNav />
         <MobileNav /> */}
         <Link href={"/"}>
-          <div className="flex items-center m-4">
-            Ranque
+          <div className="flex items-center">
+            <div className="flex items-center m-1 text-xl font-semibold bg-gradient-to-r from-slate-900 to-green-700 bg-clip-text text-transparent">
+              Ranque
+            </div>
             <ComponentBooleanIcon />
           </div>
         </Link>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+        <div className="flex flex-1 items-center justify-between mx-2 space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             <div>
               <Input
                 type="search"
                 placeholder="Search..."
-                className="md:w-[100px] lg:w-[300px]"
+                className="sm: w-[100] md:w-[100px] lg:w-[240px]"
               />
             </div>
           </div>

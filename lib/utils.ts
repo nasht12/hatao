@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { picksData } from "../app/lists/data/pickdata";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -7,6 +8,20 @@ export function cn(...inputs: ClassValue[]) {
 
 export function generateSlug(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+export function slugToNoSpace(slug: string) {
+  const withoutLists = slug.replace('/lists/', '');
+  return withoutLists.replace(/[-\s]/g, '');
+}
+
+export function getPickData(key: string) {
+  return picksData[key as keyof typeof picksData];
+}
+
+export function getPickDataIndex(key: string): number {
+  const keys = Object.keys(picksData);
+  return keys.indexOf(key);
 }
 
 type Category =

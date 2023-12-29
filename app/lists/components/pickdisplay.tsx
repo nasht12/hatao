@@ -7,10 +7,13 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 import { motion } from "framer-motion";
 import { picksData } from "../data/pickdata";
+import { slugToNoSpace, getPickData, getPickDataIndex } from "@/lib/utils";
+import { get } from "http";
+
 
 interface PickInfo {
   imageSrc: string;
-  keywords: { [keyword: string]: string };
+  // keywords: { [keyword: string]: string };
 }
 
 // const initialPicks: PickInfo[] = [
@@ -169,7 +172,12 @@ interface PickInfo {
 export default function PicksDisplay() {
   
   const pathname = usePathname();
-  const initialPicks: PickInfo[] = Object.values(picksData)[0];
+  const noSpacePathname = slugToNoSpace(pathname);
+  const listIndex = getPickDataIndex(noSpacePathname);
+  console.log('pathname', pathname);
+  console.log('noSpacePathname', noSpacePathname);
+  console.log('listIndex', listIndex);
+  const initialPicks: PickInfo[] = getPickData(noSpacePathname);
 
   const [picks, setPicks] = useState(initialPicks.slice(0, 2));
   const [shownIndices, setShownIndices] = useState([0, 1]);
@@ -188,7 +196,7 @@ export default function PicksDisplay() {
     if (shownIndices.length === initialPicks.length) {
       setPicks((prevPicks) => {
         const newPicks = [...prevPicks];
-        newPicks[notClickedIndex] = { imageSrc: "", keywords: {} };
+        newPicks[notClickedIndex] = { imageSrc: "" };
         return newPicks;
       });
       setAllPicksShown(true);
@@ -216,7 +224,7 @@ export default function PicksDisplay() {
       {picks.map((pick, index) => (
         <div key={pick.imageSrc} onClick={() => handleImageClick(index)}>
           {(index === finalClickedIndex || !allPicksShown) && (
-            <Pick imageSrc={pick.imageSrc} keywords={pick.keywords} />
+            <Pick imageSrc={pick.imageSrc} />
           )}
         </div>
       ))}

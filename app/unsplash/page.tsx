@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { Fragment, useEffect, useState } from 'react';
 import { createApi } from 'unsplash-js';
-import { DrawerDemo } from './components/image-drawer';
+import { DrawerDemo } from '../create/components/image-drawer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -81,7 +81,7 @@ const Body: React.FC = () => {
   } else {
     return (
       <div className="feed">
-        <DrawerDemo />
+        {/* <DrawerDemo /> */}
         <Input
           type="text"
           value={query}

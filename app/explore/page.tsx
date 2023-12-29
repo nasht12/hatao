@@ -34,11 +34,11 @@ export default function ExplorePage() {
                     <div className="space-between flex items-center">
                       <TabsList>
                         <TabsTrigger value="music" className="relative">
-                          Tab1
+                          General
                         </TabsTrigger>
-                        <TabsTrigger value="podcasts">Tab2</TabsTrigger>
-                        <TabsTrigger value="live" disabled>
-                          Live
+                        <TabsTrigger value="custom">Custom</TabsTrigger>
+                        <TabsTrigger value="live">
+                          Earn
                         </TabsTrigger>
                       </TabsList>
                       <div className="ml-auto mr-4">
@@ -85,16 +85,16 @@ export default function ExplorePage() {
                           <ScrollBar orientation="horizontal" />
                         </ScrollArea>
                       </div>
-                      <div className="mt-6 space-y-1">
+                      {/* <div className="mt-6 space-y-1">
                         <h2 className="text-2xl font-semibold tracking-tight">
                           Made for You
                         </h2>
                         <p className="text-sm text-muted-foreground">
                           Your personal playlists. Updated daily.
                         </p>
-                      </div>
+                      </div> */}
                       <Separator className="my-4" />
-                      <div className="relative">
+                      {/* <div className="relative">
                         <ScrollArea>
                           <div className="flex space-x-4 pb-4">
                             {madeForYouAlbums.map((album) => (
@@ -110,10 +110,10 @@ export default function ExplorePage() {
                           </div>
                           <ScrollBar orientation="horizontal" />
                         </ScrollArea>
-                      </div>
+                      </div> */}
                     </TabsContent>
                     <TabsContent
-                      value="podcasts"
+                      value="custom"
                       className="h-full flex-col border-none p-0 data-[state=active]:flex"
                     >
                       <div className="flex items-center justify-between">
