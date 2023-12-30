@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation'
 import Pick from "../../../components/pick";
 import PickInfo from "../../../components/pick";
@@ -8,7 +8,8 @@ import Confetti from "react-confetti";
 import { motion } from "framer-motion";
 import { picksData } from "../data/pickdata";
 import { slugToNoSpace, getPickData, getPickDataIndex } from "@/lib/utils";
-import { get } from "http";
+import { toast } from "sonner";
+
 
 
 interface PickInfo {
@@ -218,6 +219,14 @@ export default function PicksDisplay() {
   };
 
   const { width, height } = useWindowSize();
+
+  useEffect(() => {
+    if (allPicksShown) {
+      toast("Your Top Pick", {
+        description: "All of your picks are now displayed.",
+      });
+    }
+  }, [allPicksShown]);
 
   return (
     <div className="flex flex-row gap-4">

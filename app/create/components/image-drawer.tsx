@@ -62,15 +62,12 @@ export const DrawerDemo: React.FC<DrawerDemoProps> = ({ inputText, onUrlSelect }
     searchPhotos();
   }, [inputText]);
 
-  console.log('inputText', inputText);
-
-
   return (
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline">
           {" "}
-          {selectedImageUrl ? <CheckIcon /> : "Add Image URL"}
+          {selectedImageUrl ? <CheckIcon /> : "Image"}
         </Button>
       </DrawerTrigger>
       <DrawerContent>

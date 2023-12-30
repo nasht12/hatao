@@ -6,7 +6,7 @@ import Header from '@/components/header';
 import { Sidebar } from '@/components/sidebar';
 import { categories } from '@/data/categories';
 import { SiteHeader } from '@/components/site-header';
-
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +28,7 @@ export default function RootLayout({
         <main className="w-full flex-grow grid place-items-center">
           {children}
         </main>
+        <Toaster />
       </body>
     </html>
   );

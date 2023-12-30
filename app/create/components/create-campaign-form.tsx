@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm, useFieldArray, Controller, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -33,14 +33,21 @@ import {
 import Link from "next/link";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { DrawerDemo } from "@/app/create/components/image-drawer";
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { MinusIcon, PlusIcon, Cross2Icon, Cross1Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import createList from '../../actions';
+import { toast } from "sonner";
 
 const formSchema = z.object({
-  category: z.string().nonempty({ message: "Category is required." }),
-  subcategory: z.string().nonempty({ message: "Subcategory is required." }),
-  campaignName: z.string().min(1, "Campaign name cannot be empty"),
-  urls: z.string().nonempty({ message: "Category is required." }),
+  category: z.string().min(2, {
+    message: "category must be at least 2 characters.",
+  }),
+  subcategory: z.string().min(2, {
+    message: "subcategory must be at least 2 characters.",
+  }),
+  campaignName: z.string().min(2, {
+    message: "campaignname must be at least 2 characters.",
+  }),
   items: z.array(
     z.object({
       name: z.string(),
@@ -49,8 +56,6 @@ const formSchema = z.object({
   ),
 });
 
-type FormData = z.infer<typeof formSchema>;
-
 export default function CreateCampaign() {
   const [campName, setCampName] = useState("");
   const [isAddClicked, setIsAddClicked] = useState(false);
@@ -58,29 +63,35 @@ export default function CreateCampaign() {
   const [selectedUrl, setSelectedUrl] = useState("");
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   // const [inputText, setInputText] = useState('');
-
-  const form = useForm<FormData>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       category: "",
       subcategory: "",
       campaignName: "",
-      urls: "",
       items: [{ name: "", url: "" }],
     },
   });
 
-  const { register, control, watch } = form;
+  const { register, control, watch, handleSubmit } = form;
 
   const { fields, append, prepend, remove } = useFieldArray({
     control: form.control,
     name: "items",
   });
 
-  const onSubmit = (data: FormData) => {
-    // Handle form submission here
-    console.log(data);
-    setCampName(data.campaignName);
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const result = await createList(data);
+    if (result && result.errors) {
+      // Handle validation errors
+      console.error(result.errors);
+    } else {
+      // Handle successful form submission
+      console.log("Form submitted successfully");
+      toast("Form submitted", {
+        description: "List created successfully.",
+      });
+    }
   };
 
   return (
@@ -181,111 +192,125 @@ export default function CreateCampaign() {
             {isAddClicked && (
               <>
                 <Button
-                  type="button"
-                  onClick={() => {
-                    append({ name: "", url: "" }),
-                      setSelectedUrls([...selectedUrls, ""]);
-                    setIsUrlSelected([...isUrlSelected, false]);
-                  }}
-                  className="focus:outline-none w-14 h-10 hover:w-16 transition-all duration-100"
-                  title="Add"
+                  onClick={() => setIsAddClicked(false)}
+                  title="Back"
+                  className="focus:outline-none w-14 h-10"
                 >
-                  <PlusIcon />
+                  <IoIosArrowRoundBack className="w-8 h-8 hover:w-10 transition-all duration-200" />
                 </Button>
                 {fields.map((field, index) => {
-const itemName = watch(`items.${index}.name`);
-return (
-  <div key={field.id} className="flex items-center ">
-    <div>
-      <FormItem className="mr-2">
-        {/* <FormLabel>Name</FormLabel> */}
-        <FormControl>
-          <Input
-            {...form.register(`items[${index}].name` as `items.${number}.name`)}
-            className="p-2 border rounded-md"
-            placeholder="Name"
-          />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </div>
-    <div>
-      <FormItem className="ml-2">
-        {/* <FormLabel>URL</FormLabel> */}
-        <FormControl>
-          {/* <Input
+                  const itemName = watch(`items.${index}.name`);
+                  return (
+                    <div key={field.id} className="flex items-center ">
+                      <div>
+                        <FormItem className="mr-2">
+                          {/* <FormLabel>Name</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              {...form.register(
+                                `items[${index}].name` as `items.${number}.name`
+                              )}
+                              className="p-2 border rounded-md"
+                              placeholder="Name"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      </div>
+                      <div>
+                        <FormItem className="ml-2">
+                          {/* <FormLabel>URL</FormLabel> */}
+                          <FormControl>
+                            {/* <Input
                           {...form.register(
                             `items[${index}].url` as `items.${number}.url`
                           )}
                           className="p-2 border rounded-md"
                           placeholder="URL"
                         /> */}
-          {/* <Input value={selectedUrl} readOnly /> */}
-          {isUrlSelected[index] ? (
-            <>
-              {/* <Input value={selectedUrls[index]} readOnly /> */}
-              <button
-                onClick={() => {
-                  const newIsUrlSelected = [...isUrlSelected];
-                  newIsUrlSelected[index] = false;
-                  setIsUrlSelected(newIsUrlSelected);
-                }}
-              >
-                <Image
-                  src={selectedUrls[index]}
-                  alt="Selected"
-                  width="20"
-                  height="20"
-                />
-              </button>
-            </>
-          ) : (
-            <DrawerDemo
-              inputText={itemName}
-              onUrlSelect={(url) => {
-                const newUrls = [...selectedUrls];
-                newUrls[index] = url;
-                setSelectedUrls(newUrls);
-                const newIsUrlSelected = [...isUrlSelected];
-                newIsUrlSelected[index] = true;
-                setIsUrlSelected(newIsUrlSelected);
-              }}
-            />
-          )}
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-      {/* <DrawerDemo onUrlSelect={setSelectedUrl}/> */}
-    </div>
-    <div className="relative">
-      <Button
-        type="button"
-        onClick={() => {
-          remove(index);
-          const newUrls = [...selectedUrls];
-          newUrls.splice(index, 1);
-          setSelectedUrls(newUrls);
-          const newIsUrlSelected = [...isUrlSelected];
-          newIsUrlSelected.splice(index, 1);
-          setIsUrlSelected(newIsUrlSelected);
-        }}
-        className="ml-2 hover:"
-        disabled={fields.length === 1}
-        title="Remove"
-      >
-        <MinusIcon />
-      </Button>
-    </div>
-  </div>
-);
+                            {/* <Input value={selectedUrl} readOnly /> */}
+                            {isUrlSelected[index] ? (
+                              <>
+                                {/* <Input value={selectedUrls[index]} readOnly /> */}
+                                <Button
+                                  onClick={() => {
+                                    const newIsUrlSelected = [...isUrlSelected];
+                                    newIsUrlSelected[index] = false;
+                                    setIsUrlSelected(newIsUrlSelected);
+                                  }}
+                                >
+                                  <Image
+                                    src={selectedUrls[index]}
+                                    alt="Selected"
+                                    width="20"
+                                    height="20"
+                                  />
+                                </Button>
+                              </>
+                            ) : (
+                              <DrawerDemo
+                                inputText={itemName}
+                                onUrlSelect={(url) => {
+                                  const newUrls = [...selectedUrls];
+                                  newUrls[index] = url;
+                                  setSelectedUrls(newUrls);
+                                  const newIsUrlSelected = [...isUrlSelected];
+                                  newIsUrlSelected[index] = true;
+                                  setIsUrlSelected(newIsUrlSelected);
+
+                                  form.setValue(`items.${index as number}.url`, url);
+                                }}
+                              />
+                            )}
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      </div>
+                      <div className="relative">
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            remove(index);
+                            const newUrls = [...selectedUrls];
+                            newUrls.splice(index, 1);
+                            setSelectedUrls(newUrls);
+                            const newIsUrlSelected = [...isUrlSelected];
+                            newIsUrlSelected.splice(index, 1);
+                            setIsUrlSelected(newIsUrlSelected);
+                          }}
+                          className="ml-2 focus:outline-none w-14 h-10"
+                          disabled={fields.length === 1}
+                          title="Remove"
+                        >
+                          <Cross2Icon className="hover:w-6 h-6"/>
+                        </Button>
+                      </div>
+                    </div>
+                  );
                 })}
-                <Button
-                  onClick={() => setIsAddClicked(false)}
-                  title="Back"
-                  className="focus:outline-none "
-                >
-                  <IoIosArrowRoundBack className="w-6 h-6 hover:w-8 transition-all duration-200" />
-                </Button>
+                <div className="flex flex-col gap-4">
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      append({ name: "", url: "" }),
+                        setSelectedUrls([...selectedUrls, ""]);
+                      setIsUrlSelected([...isUrlSelected, false]);
+                    }}
+                    className="focus:outline-none w-14 h-10"
+                    title="Add"
+                  >
+                    <PlusIcon className="hover:w-6 h-6"/>
+                    {/* Add */}
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    title="Create"
+                    className="hover:bg-green-200 text-white hover:text-black"
+                  >
+                    Create
+                  </Button>
+                </div>
               </>
             )}
           </form>
