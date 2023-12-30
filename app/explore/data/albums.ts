@@ -30,7 +30,7 @@ export interface Album {
         "https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=300&dpr=2&q=80",
     },
     {
-      name: "Day Trips from Seattle",
+      name: "Favourite City",
       artist: "Travel",
       cover:
         "https://images.unsplash.com/photo-1627844718626-4c6b963baac0?w=300&dpr=2&q=80",

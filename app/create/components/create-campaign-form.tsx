@@ -48,6 +48,9 @@ const formSchema = z.object({
   campaignName: z.string().min(2, {
     message: "campaignname must be at least 2 characters.",
   }),
+  campaignUrl: z.string().min(2, {
+    message: "campaignname must be at least 2 characters.",
+  }),
   items: z.array(
     z.object({
       name: z.string(),
@@ -58,8 +61,11 @@ const formSchema = z.object({
 
 export default function CreateCampaign() {
   const [campName, setCampName] = useState("");
+  const [topic, setTopic] = useState('');
   const [isAddClicked, setIsAddClicked] = useState(false);
   const [isUrlSelected, setIsUrlSelected] = useState<boolean[]>([false]);
+  const [isCampUrlSelected, setIsCampUrlSelected] = useState(false);
+  const [campUrl, setCampUrl] = useState("");
   const [selectedUrl, setSelectedUrl] = useState("");
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   // const [inputText, setInputText] = useState('');
@@ -69,6 +75,7 @@ export default function CreateCampaign() {
       category: "",
       subcategory: "",
       campaignName: "",
+      campaignUrl: "",
       items: [{ name: "", url: "" }],
     },
   });
@@ -140,7 +147,10 @@ export default function CreateCampaign() {
                     <FormItem>
                       <FormLabel className="p-2">Topic</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setTopic(value);
+                        }}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -172,6 +182,40 @@ export default function CreateCampaign() {
                           className="p-2 border rounded-md"
                           placeholder="Enter campaign name"
                         />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="campaignUrl"
+                  render={({ field }) => (
+                    <FormItem className="ml-2">
+                      <FormControl>
+                        {isCampUrlSelected ? (
+                          <Button
+                            onClick={() => {
+                              setIsCampUrlSelected(false);
+                            }}
+                          >
+                            <Image
+                              src={campUrl}
+                              alt="Selected"
+                              width="20"
+                              height="20"
+                            />
+                          </Button>
+                        ) : (
+                          <DrawerDemo
+                            inputText={topic}
+                            onUrlSelect={(url) => {
+                              setCampUrl(url);
+                              setIsCampUrlSelected(true);
+                              form.setValue("campaignUrl", url); // set the campaignUrl field value
+                            }}
+                          />
+                        )}
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -258,7 +302,10 @@ export default function CreateCampaign() {
                                   newIsUrlSelected[index] = true;
                                   setIsUrlSelected(newIsUrlSelected);
 
-                                  form.setValue(`items.${index as number}.url`, url);
+                                  form.setValue(
+                                    `items.${index as number}.url`,
+                                    url
+                                  );
                                 }}
                               />
                             )}
@@ -282,7 +329,7 @@ export default function CreateCampaign() {
                           disabled={fields.length === 1}
                           title="Remove"
                         >
-                          <Cross2Icon className="hover:w-6 h-6"/>
+                          <Cross2Icon className="hover:w-6 h-6" />
                         </Button>
                       </div>
                     </div>
@@ -299,7 +346,7 @@ export default function CreateCampaign() {
                     className="focus:outline-none w-14 h-10"
                     title="Add"
                   >
-                    <PlusIcon className="hover:w-6 h-6"/>
+                    <PlusIcon className="hover:w-6 h-6" />
                     {/* Add */}
                   </Button>
 

@@ -12,7 +12,8 @@ export function generateSlug(name: string) {
 
 export function slugToNoSpace(slug: string) {
   const withoutLists = slug.replace('/lists/', '');
-  return withoutLists.replace(/[-\s]/g, '');
+  const noSpaces = withoutLists.replace(/[-\s]/g, '');
+  return noSpaces.toLowerCase();
 }
 
 export function getPickData(key: string) {

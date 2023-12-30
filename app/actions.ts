@@ -3,18 +3,28 @@
 import { z } from 'zod';
 import fs from 'fs';
 import path from 'path';
+import { slugToNoSpace } from '@/lib/utils';
 
 interface FormValues {
   category: string;
   subcategory: string;
   campaignName: string;
+  campaignUrl: string;
   items: { name: string; url: string }[];
 }
+
+interface Item {
+    name: string;
+    url: string;
+  }
+// Use FormValues interface instead of defining a new Campaign interface
+type Campaign = FormValues;
 
 const schema = z.object({
   category: z.string(),
   subcategory: z.string(),
   campaignName: z.string(),
+  campaignUrl: z.string(),
   items: z.array(
     z.object({
       name: z.string(),
@@ -59,3 +69,42 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     });
   });
 }
+
+export async function fetchList(campaignName: string): Promise<Item[]> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(path.resolve('./data/lists.json'), 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error reading file:', err);
+          reject(err);
+          return;
+        }
+  
+        // Parse the data into a JavaScript array
+        let existingData: Campaign[] = JSON.parse(data || '[]');
+  
+        // Find the campaign with the matching campaignName
+        const campaign = existingData.find(campaign => slugToNoSpace(campaign.campaignName) === campaignName);
+  
+        if (campaign) {
+          // If a matching campaign is found, resolve the promise with the items array
+          resolve(campaign.items);
+        } else {
+          // If no matching campaign is found, resolve the promise with an empty array
+          resolve([]);
+        }
+      });
+    });
+  }
+
+  export async function fetchAllLists(): Promise<FormValues[]> {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path.resolve('./data/lists.json'), 'utf8', (err, data) => {
+            if (err) {
+              reject(err);
+            } else {
+              let lists: FormValues[] = JSON.parse(data || "[]");
+              resolve(lists);
+            }
+      });
+    });
+  }

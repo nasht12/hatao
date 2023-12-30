@@ -1,137 +1,9 @@
 [
   {
-    "subcategory": "Basketball",
-    "campaignName": "best game",
-    "items": [
-      {
-        "name": "basketball",
-        "url": "https://images.unsplash.com/photo-1518063319789-7217e6706b04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw2fHxiYXNrZXRiYWxsfGVufDB8MXx8fDE3MDM5MTkyMjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "subcategory": "Animals",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "dog",
-        "url": "https://images.unsplash.com/photo-1517849845537-4d257902454a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwyfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Entertainment",
-    "subcategory": "Animals",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "music",
-        "url": "https://images.unsplash.com/photo-1619983081563-430f63602796?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxtdXNpY3xlbnwwfDF8fHwxNzAzOTE5NDM0fDA&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Entertainment",
-    "subcategory": "Animals",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "music",
-        "url": "https://images.unsplash.com/photo-1619983081563-430f63602796?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxtdXNpY3xlbnwwfDF8fHwxNzAzOTE5NDM0fDA&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "piano",
-        "url": "https://images.unsplash.com/photo-1565879629766-30adf38aac56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxwaWFub3xlbnwwfDF8fHwxNzAzOTIwNDk0fDA&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
     "category": "Sports",
     "subcategory": "Novels",
     "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "dog",
-        "url": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "sky",
-        "url": "https://images.unsplash.com/photo-1548266652-99cf27701ced?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw0fHxza3l8ZW58MHwxfHx8MTcwMzkyMDg2N3ww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "cat",
-        "url": "https://images.unsplash.com/photo-1573865526739-10659fec78a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxjYXR8ZW58MHwxfHx8MTcwMzkyMDg3NXww&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Sports",
-    "subcategory": "Novels",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "dog",
-        "url": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "sky",
-        "url": "https://images.unsplash.com/photo-1548266652-99cf27701ced?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw0fHxza3l8ZW58MHwxfHx8MTcwMzkyMDg2N3ww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "cat",
-        "url": "https://images.unsplash.com/photo-1573865526739-10659fec78a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxjYXR8ZW58MHwxfHx8MTcwMzkyMDg3NXww&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Sports",
-    "subcategory": "Novels",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "dog",
-        "url": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "sky",
-        "url": "https://images.unsplash.com/photo-1548266652-99cf27701ced?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw0fHxza3l8ZW58MHwxfHx8MTcwMzkyMDg2N3ww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "cat",
-        "url": "https://images.unsplash.com/photo-1573865526739-10659fec78a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxjYXR8ZW58MHwxfHx8MTcwMzkyMDg3NXww&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Sports",
-    "subcategory": "Novels",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "dog",
-        "url": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Sports",
-    "subcategory": "Novels",
-    "campaignName": "Best Music",
-    "items": [
-      {
-        "name": "dog",
-        "url": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080"
-      },
-      {
-        "name": "a",
-        "url": "https://images.unsplash.com/photo-1589261769919-26a29b6eba1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw2fHxhfGVufDB8MXx8fDE3MDM5MDU3MTh8MA&ixlib=rb-4.0.3&q=80&w=1080"
-      }
-    ]
-  },
-  {
-    "category": "Sports",
-    "subcategory": "Novels",
-    "campaignName": "Best Music",
+    "campaignUrl": "https://images.unsplash.com/photo-1530891671629-3a053324e4f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxwb3J0bGFuZHxlbnwwfDF8fHwxNzAzOTU5NDA0fDA&ixlib=rb-4.0.3&q=80&w=1080",
     "items": [
       {
         "name": "dog",
@@ -144,6 +16,102 @@
       {
         "name": "rain",
         "url": "https://images.unsplash.com/photo-1503435824048-a799a3a84bf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxyYWlufGVufDB8MXx8fDE3MDM5MjEzMzF8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      }
+    ]
+  },
+  {
+    "category": "Places",
+    "subcategory": "Cities",
+    "campaignName": "Favourite city",
+    "campaignUrl": "https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxzZWF0dGxlfGVufDB8MXx8fDE3MDM5NTkyODN8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    "items": [
+      {
+        "name": "seattle",
+        "url": "https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxzZWF0dGxlfGVufDB8MXx8fDE3MDM5NTkyODN8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "new york",
+        "url": "https://images.unsplash.com/photo-1534270804882-6b5048b1c1fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxuZXclMjB5b3JrfGVufDB8MXx8fDE3MDM5NTkyOTl8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "san francisco",
+        "url": "https://images.unsplash.com/photo-1551283895-bad586708963?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw1fHxzYW4lMjBmcmFuY2lzY298ZW58MHwxfHx8MTcwMzk1OTMzM3ww&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "miami",
+        "url": "https://images.unsplash.com/photo-1597535973747-951442d5dbc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxtaWFtaXxlbnwwfDF8fHwxNzAzOTU5MzU1fDA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "new orleans",
+        "url": "https://images.unsplash.com/photo-1578506971248-38ad15eb77a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwyfHxuZXclMjBvcmxlYW5zfGVufDB8MXx8fDE3MDM5NTkzNzV8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "denver",
+        "url": "https://images.unsplash.com/photo-1616127055279-6e4f17b87a5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxkZW52ZXJ8ZW58MHwxfHx8MTcwMzk1OTM5Mnww&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "portland",
+        "url": "https://images.unsplash.com/photo-1530891671629-3a053324e4f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxwb3J0bGFuZHxlbnwwfDF8fHwxNzAzOTU5NDA0fDA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "chicago",
+        "url": "https://images.unsplash.com/photo-1487788270274-b0a7d600569f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw0fHxjaGljYWdvfGVufDB8MXx8fDE3MDM5NTk0ODR8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      }
+    ]
+  },
+  {
+    "category": "Sports",
+    "subcategory": "Football",
+    "campaignName": "Best Club",
+    "campaignUrl": "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxkb2d8ZW58MHwxfHx8MTcwMzkxOTMxOXww&ixlib=rb-4.0.3&q=80&w=1080",
+    "items": [
+      {
+        "name": "fcbarcelona",
+        "url": "https://images.unsplash.com/photo-1660304755794-a4c94ca4cceb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxmY2JhcmNlbG9uYXxlbnwwfDF8fHwxNzAzOTcyMDU2fDA&ixlib=rb-4.0.3&q=80&w=1080"
+      }
+    ]
+  },
+  {
+    "category": "Entertainment",
+    "subcategory": "Movies",
+    "campaignName": "movie",
+    "campaignUrl": "https://images.unsplash.com/photo-1503435824048-a799a3a84bf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxyYWlufGVufDB8MXx8fDE3MDM5MjEzMzF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    "items": [
+      {
+        "name": "fire",
+        "url": "https://images.unsplash.com/photo-1578885136359-16c8bd4d3a8e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw0fHxmaXJlfGVufDB8MXx8fDE3MDM5MDY5MzZ8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      }
+    ]
+  },
+  {
+    "category": "Food and Drink",
+    "subcategory": "TV Shows",
+    "campaignName": "water",
+    "campaignUrl": "https://images.unsplash.com/photo-1562016600-ece13e8ba570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHx3YXRlcnxlbnwwfDF8fHwxNzAzOTcyODQ5fDA&ixlib=rb-4.0.3&q=80&w=1080",
+    "items": [
+      {
+        "name": "sea",
+        "url": "https://images.unsplash.com/photo-1497290756760-23ac55edf36f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxzZWF8ZW58MHwxfHx8MTcwMzg5NDA1N3ww&ixlib=rb-4.0.3&q=80&w=1080"
+      }
+    ]
+  },
+  {
+    "category": "Places",
+    "subcategory": "Cities",
+    "campaignName": "tv shows",
+    "campaignUrl": "https://images.unsplash.com/photo-1525095240410-9645dea911e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwyfHxDaXRpZXN8ZW58MHwxfHx8MTcwMzk3MzA4M3ww&ixlib=rb-4.0.3&q=80&w=1080",
+    "items": [
+      {
+        "name": "rain",
+        "url": "https://images.unsplash.com/photo-1503435824048-a799a3a84bf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwzfHxyYWlufGVufDB8MXx8fDE3MDM5MjEzMzF8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "portland",
+        "url": "https://images.unsplash.com/photo-1530891671629-3a053324e4f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHwxfHxwb3J0bGFuZHxlbnwwfDF8fHwxNzAzOTU5NDA0fDA&ixlib=rb-4.0.3&q=80&w=1080"
+      },
+      {
+        "name": "chicago",
+        "url": "https://images.unsplash.com/photo-1487788270274-b0a7d600569f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDU5MTZ8MHwxfHNlYXJjaHw0fHxjaGljYWdvfGVufDB8MXx8fDE3MDM5NTk0ODR8MA&ixlib=rb-4.0.3&q=80&w=1080"
       }
     ]
   }

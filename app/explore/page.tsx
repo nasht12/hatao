@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+"use client";
+import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
@@ -13,13 +14,32 @@ import { listenNowAlbums, madeForYouAlbums } from "./data/albums";
 import { playlists } from "./data/playlists";
 import Link from "next/link";
 import { generateSlug } from "@/lib/utils";
+import { fetchAllLists } from '@/app/actions';
 
-export const metadata: Metadata = {
-  title: "Rank App",
-  description: "Rank lists from different topics",
-};
+interface Item {
+  name: string;
+  url: string;
+}
+
+interface List {
+  category: string;
+  subcategory: string;
+  campaignName: string;
+  campaignUrl: string;
+  items: Item[];
+}
 
 export default function ExplorePage() {
+  const [lists, setLists] = useState<List[]>([]);
+
+  useEffect(() => {
+    fetchAllLists()
+      .then(items => {
+        setLists(items);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
   return (
     <>
       <div className="hidden md:block">
@@ -70,16 +90,27 @@ export default function ExplorePage() {
                       <div className="relative">
                         <ScrollArea>
                           <div className="flex space-x-4 pb-4">
-                            {listenNowAlbums.map((album) => (
-                              <Link key={album.name} href={`/lists/${generateSlug(album.name)}`}>                                <AlbumArtwork
-                                  key={album.name}
-                                  album={album}
+                            {lists.map((list) => (
+                              <Link
+                                key={list.campaignName}
+                                href={`/lists/${generateSlug(
+                                  list.campaignName
+                                )}`}
+                              >
+                                {" "}
+                                <AlbumArtwork
+                                  key={list.campaignName}
+                                  album={{
+                                    name: list.campaignName,
+                                    artist: list.subcategory,
+                                    cover: list.campaignUrl,
+                                  }}
                                   className="w-[250px]"
                                   aspectRatio="portrait"
                                   width={250}
                                   height={330}
                                 />
-                                </Link>
+                              </Link>
                             ))}
                           </div>
                           <ScrollBar orientation="horizontal" />
@@ -97,9 +128,9 @@ export default function ExplorePage() {
                       {/* <div className="relative">
                         <ScrollArea>
                           <div className="flex space-x-4 pb-4">
-                            {madeForYouAlbums.map((album) => (
+                            {lists.map((album) => (
                               <AlbumArtwork
-                                key={album.name}
+                                key={album.campaignName}
                                 album={album}
                                 className="w-[150px]"
                                 aspectRatio="square"
