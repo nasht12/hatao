@@ -37,9 +37,9 @@ export default function ExplorePage() {
                           General
                         </TabsTrigger>
                         <TabsTrigger value="custom">Custom</TabsTrigger>
-                        <TabsTrigger value="live">
+                        {/* <TabsTrigger value="live">
                           Earn
-                        </TabsTrigger>
+                        </TabsTrigger> */}
                       </TabsList>
                       <div className="ml-auto mr-4">
                         <Button>

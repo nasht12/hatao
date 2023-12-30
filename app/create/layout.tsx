@@ -3,7 +3,6 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { Announcement } from "@/components/announcement"
-import { ExamplesNav } from "@/components/examples-nav"
 
 export const metadata: Metadata = {
   title: "Examples",

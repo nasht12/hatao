@@ -34,6 +34,7 @@ import Link from "next/link";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { DrawerDemo } from "@/app/create/components/image-drawer";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 
 const formSchema = z.object({
   category: z.string().nonempty({ message: "Category is required." }),
@@ -56,6 +57,7 @@ export default function CreateCampaign() {
   const [isUrlSelected, setIsUrlSelected] = useState<boolean[]>([false]);
   const [selectedUrl, setSelectedUrl] = useState("");
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
+  // const [inputText, setInputText] = useState('');
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -67,6 +69,8 @@ export default function CreateCampaign() {
       items: [{ name: "", url: "" }],
     },
   });
+
+  const { register, control, watch } = form;
 
   const { fields, append, prepend, remove } = useFieldArray({
     control: form.control,
@@ -179,75 +183,102 @@ export default function CreateCampaign() {
                 <Button
                   type="button"
                   onClick={() => {
-                    prepend({ name: "", url: "" }),
+                    append({ name: "", url: "" }),
                       setSelectedUrls([...selectedUrls, ""]);
-                      setIsUrlSelected([...isUrlSelected, false]);
+                    setIsUrlSelected([...isUrlSelected, false]);
                   }}
                   className="focus:outline-none w-14 h-10 hover:w-16 transition-all duration-100"
                   title="Add"
                 >
                   <PlusIcon />
                 </Button>
-                {fields.map((field, index) => (
-                  <div key={field.id} className="flex items-center ">
-                    <div>
-                      <FormItem className="mr-2">
-                        {/* <FormLabel>Name</FormLabel> */}
-                        <FormControl>
-                          <Input
-                            {...form.register(
-                              `items[${index}].name` as `items.${number}.name`
-                            )}
-                            className="p-2 border rounded-md"
-                            placeholder="Name"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    </div>
-                    <div>
-                      <FormItem className="ml-2">
-                        {/* <FormLabel>URL</FormLabel> */}
-                        <FormControl>
-                          {/* <Input
+                {fields.map((field, index) => {
+const itemName = watch(`items.${index}.name`);
+return (
+  <div key={field.id} className="flex items-center ">
+    <div>
+      <FormItem className="mr-2">
+        {/* <FormLabel>Name</FormLabel> */}
+        <FormControl>
+          <Input
+            {...form.register(`items[${index}].name` as `items.${number}.name`)}
+            className="p-2 border rounded-md"
+            placeholder="Name"
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    </div>
+    <div>
+      <FormItem className="ml-2">
+        {/* <FormLabel>URL</FormLabel> */}
+        <FormControl>
+          {/* <Input
                           {...form.register(
                             `items[${index}].url` as `items.${number}.url`
                           )}
                           className="p-2 border rounded-md"
                           placeholder="URL"
                         /> */}
-                          {/* <Input value={selectedUrl} readOnly /> */}
-                          {isUrlSelected[index] ? (
-                            <Input value={selectedUrls[index]} readOnly />
-                          ) : (
-                            <DrawerDemo
-                              onUrlSelect={(url) => {
-                                const newUrls = [...selectedUrls];
-                                newUrls[newUrls.length - 1] = url;
-                                setSelectedUrls(newUrls);
-                                const newIsUrlSelected = [...isUrlSelected];
-                                newIsUrlSelected[newIsUrlSelected.length - 1] = true;
-                                setIsUrlSelected(newIsUrlSelected);                              }}
-                            />
-                          )}
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                      {/* <DrawerDemo onUrlSelect={setSelectedUrl}/> */}
-                    </div>
-                    <div className="relative">
-                      <Button
-                        type="button"
-                        onClick={() => remove(index)}
-                        className="ml-2 hover:"
-                        disabled={fields.length === 1}
-                        title="Remove"
-                      >
-                        <MinusIcon />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+          {/* <Input value={selectedUrl} readOnly /> */}
+          {isUrlSelected[index] ? (
+            <>
+              {/* <Input value={selectedUrls[index]} readOnly /> */}
+              <button
+                onClick={() => {
+                  const newIsUrlSelected = [...isUrlSelected];
+                  newIsUrlSelected[index] = false;
+                  setIsUrlSelected(newIsUrlSelected);
+                }}
+              >
+                <Image
+                  src={selectedUrls[index]}
+                  alt="Selected"
+                  width="20"
+                  height="20"
+                />
+              </button>
+            </>
+          ) : (
+            <DrawerDemo
+              inputText={itemName}
+              onUrlSelect={(url) => {
+                const newUrls = [...selectedUrls];
+                newUrls[index] = url;
+                setSelectedUrls(newUrls);
+                const newIsUrlSelected = [...isUrlSelected];
+                newIsUrlSelected[index] = true;
+                setIsUrlSelected(newIsUrlSelected);
+              }}
+            />
+          )}
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+      {/* <DrawerDemo onUrlSelect={setSelectedUrl}/> */}
+    </div>
+    <div className="relative">
+      <Button
+        type="button"
+        onClick={() => {
+          remove(index);
+          const newUrls = [...selectedUrls];
+          newUrls.splice(index, 1);
+          setSelectedUrls(newUrls);
+          const newIsUrlSelected = [...isUrlSelected];
+          newIsUrlSelected.splice(index, 1);
+          setIsUrlSelected(newIsUrlSelected);
+        }}
+        className="ml-2 hover:"
+        disabled={fields.length === 1}
+        title="Remove"
+      >
+        <MinusIcon />
+      </Button>
+    </div>
+  </div>
+);
+                })}
                 <Button
                   onClick={() => setIsAddClicked(false)}
                   title="Back"

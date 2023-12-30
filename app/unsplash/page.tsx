@@ -25,7 +25,7 @@ interface Photo {
 
 // Initialize the Unsplash API
 const api = createApi({
-    accessKey: process.env.NEXT_PUBLIC_ACCESS_KEY || "",
+    accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || "",
 });
 
 const PhotoComp: React.FC<{ photo: Photo }> = ({ photo }) => {

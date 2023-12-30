@@ -10,7 +10,7 @@ const MoviePosterSearch = () => {
 
   const searchMovie = async () => {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=70c381f9&t=${encodeURIComponent(title)}`
+      `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_ACCESS_KEY}&t=${encodeURIComponent(title)}`
     );
     const data = await response.json();
     if (data.Response === "True") {

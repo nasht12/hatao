@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -24,14 +24,15 @@ type Photo = {
 };
 
 interface DrawerDemoProps {
+  inputText: string;
   onUrlSelect: (url: string) => void;
 }
 
 const api = createApi({
-  accessKey: process.env.NEXT_PUBLIC_ACCESS_KEY || "",
+  accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || "",
 });
 
-export function DrawerDemo({ onUrlSelect }: DrawerDemoProps) {
+export const DrawerDemo: React.FC<DrawerDemoProps> = ({ inputText, onUrlSelect }) => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState<{
     response: { results: Photo[] };
@@ -47,7 +48,7 @@ export function DrawerDemo({ onUrlSelect }: DrawerDemoProps) {
 
   const searchPhotos = () => {
     api.search
-      .getPhotos({ query, orientation: "portrait", perPage: 6 })
+      .getPhotos({ query: inputText || "abstract", orientation: "portrait", perPage: 6 })
       .then((result) => {
         if (result.type === "success") {
           setData(result);
@@ -56,6 +57,12 @@ export function DrawerDemo({ onUrlSelect }: DrawerDemoProps) {
         }
       });
   };
+
+  useEffect(() => {
+    searchPhotos();
+  }, [inputText]);
+
+  console.log('inputText', inputText);
 
 
   return (
@@ -69,19 +76,19 @@ export function DrawerDemo({ onUrlSelect }: DrawerDemoProps) {
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
-            <DrawerTitle>Image Search</DrawerTitle>
+            <DrawerTitle>{inputText ? `Results for "${inputText}"` : "No results"}</DrawerTitle>
             <DrawerDescription>
-              Search for images from Unsplash.
+              
             </DrawerDescription>
           </DrawerHeader>
           <div className="p-4 pb-0 flex">
-            <Input
+            {/* <Input
               type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              value={inputText}
+              onChange={(e) => {setQuery(e.target.value), setSearchText(e.target.value)}}
               className="mr-4"
             />
-            <Button onClick={searchPhotos}>Search</Button>
+            <Button onClick={searchPhotos}>Search</Button> */}
           </div>
           <div className="grid grid-cols-3 gap-4 mt-4">
             {data?.response.results.map((photo) => (
