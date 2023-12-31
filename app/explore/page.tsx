@@ -88,7 +88,7 @@ export default function ExplorePage() {
                       </div>
                       <Separator className="my-4" />
                       <div className="relative">
-                        <ScrollArea>
+                        <ScrollArea >
                           <div className="flex space-x-4 pb-4">
                             {lists.map((list) => (
                               <Link

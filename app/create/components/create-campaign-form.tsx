@@ -68,7 +68,6 @@ export default function CreateCampaign() {
   const [campUrl, setCampUrl] = useState("");
   const [selectedUrl, setSelectedUrl] = useState("");
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
-  // const [inputText, setInputText] = useState('');
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -263,16 +262,7 @@ export default function CreateCampaign() {
                       </div>
                       <div>
                         <FormItem className="ml-2">
-                          {/* <FormLabel>URL</FormLabel> */}
                           <FormControl>
-                            {/* <Input
-                          {...form.register(
-                            `items[${index}].url` as `items.${number}.url`
-                          )}
-                          className="p-2 border rounded-md"
-                          placeholder="URL"
-                        /> */}
-                            {/* <Input value={selectedUrl} readOnly /> */}
                             {isUrlSelected[index] ? (
                               <>
                                 {/* <Input value={selectedUrls[index]} readOnly /> */}
