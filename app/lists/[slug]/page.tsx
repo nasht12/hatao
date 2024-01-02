@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation'
 import PicksDisplay from "@/app/lists/components/pickdisplay";
-import { fetchList } from '@/app/actions';
-import { slugToNoSpace } from '@/lib/utils';
+import { fetchListDb } from '@/app/actions';
+import { slugToNoSpace, slugToOriginal } from '@/lib/utils';
 
 interface Props {
   campaignName: string;
@@ -16,16 +16,17 @@ interface Item {
 export default function Ranque() {
   const [lists, setLists] = useState<Item[]>([]);
   const pathname = usePathname();
-  const noSpacePathname = slugToNoSpace(pathname);
-
+  const noSpacePathname = slugToOriginal(pathname.replace('/lists/', ''));
 
   useEffect(() => {
-    fetchList(noSpacePathname)
+    fetchListDb(noSpacePathname)
       .then(items => {
         setLists(items);
       })
       .catch(error => console.error(error));
   }, [noSpacePathname]);
+
+  console.log('lists', lists);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

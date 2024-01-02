@@ -7,9 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function generateSlug(name: string) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return name.replace(/\s+/g, '-');
 }
 
+export function slugToOriginal(slug: string) {
+  return slug.replace(/-/g, ' ');
+}
 export function slugToNoSpace(slug: string) {
   const withoutLists = slug.replace('/lists/', '');
   const noSpaces = withoutLists.replace(/[-\s]/g, '');

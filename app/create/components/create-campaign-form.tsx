@@ -35,7 +35,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { DrawerDemo } from "@/app/create/components/image-drawer";
 import { MinusIcon, PlusIcon, Cross2Icon, Cross1Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import createList from '../../actions';
+import createListDb from '../../actions';
 import { toast } from "sonner";
 
 const formSchema = z.object({
@@ -87,7 +87,7 @@ export default function CreateCampaign() {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const result = await createList(data);
+    const result = await createListDb(data);
     if (result && result.errors) {
       // Handle validation errors
       console.error(result.errors);

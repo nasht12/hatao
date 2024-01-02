@@ -14,7 +14,7 @@ import { listenNowAlbums, madeForYouAlbums } from "./data/albums";
 import { playlists } from "./data/playlists";
 import Link from "next/link";
 import { generateSlug } from "@/lib/utils";
-import { fetchAllLists } from '@/app/actions';
+import { fetchAllListDb } from '@/app/actions';
 
 interface Item {
   name: string;
@@ -33,9 +33,17 @@ export default function ExplorePage() {
   const [lists, setLists] = useState<List[]>([]);
 
   useEffect(() => {
-    fetchAllLists()
+    fetchAllListDb()
       .then(items => {
-        setLists(items);
+        const lists: List[] = items.map((item) => ({
+          category: item.category,
+          subcategory: item.subcategory,
+          campaignName: item.campaign_name,
+          campaignUrl: item.campaign_url,
+          items: item.items,
+        }));
+  
+        setLists(lists);
       })
       .catch(error => console.error(error));
   }, []);

@@ -32,7 +32,14 @@ const MoviePosterSearch = () => {
         <Button onClick={searchMovie}>Search</Button>
       </div>
       {posterUrl && (
-        <Image src={posterUrl} alt="Movie Poster" width={300} height={300} />
+        <Image
+          src={posterUrl}
+          alt="Movie Poster"
+          width="0"
+          height="0"
+          sizes="100vw"
+          className="w-32 h-auto"
+        />
       )}
       <p>{posterUrl}</p>
     </div>
