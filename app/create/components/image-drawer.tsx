@@ -28,7 +28,7 @@ interface DrawerDemoProps {
   onUrlSelect: (url: string) => void;
 }
 
-const api = createApi({
+const unsplashapi = createApi({
   accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || "",
 });
 
@@ -47,7 +47,7 @@ export const DrawerDemo: React.FC<DrawerDemoProps> = ({ inputText, onUrlSelect }
   };
 
   const searchPhotos = () => {
-    api.search
+    unsplashapi.search
       .getPhotos({ query: inputText || "abstract", orientation: "portrait", perPage: 6 })
       .then((result) => {
         if (result.type === "success") {
@@ -95,7 +95,7 @@ export const DrawerDemo: React.FC<DrawerDemoProps> = ({ inputText, onUrlSelect }
                 width="120"
                 height="120"
                 alt=""
-                className={`w-full h-auto ${
+                className={`w-36 h-48 ${
                   selectedImageId === photo.id ? "border-4 border-black" : ""
                 }`}
                 onClick={() => {

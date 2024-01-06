@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFieldArray, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { categories } from "@/data/categories";
-import { subcategories } from "@/data/subcategories";
+import { topics } from "@/data/topics";
 import {
   Card,
   CardContent,
@@ -35,15 +35,15 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { DrawerDemo } from "@/app/create/components/image-drawer";
 import { MinusIcon, PlusIcon, Cross2Icon, Cross1Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import createListDb from '../../actions';
+import createListFromDb from '../../actions';
 import { toast } from "sonner";
 
 const formSchema = z.object({
   category: z.string().min(2, {
     message: "category must be at least 2 characters.",
   }),
-  subcategory: z.string().min(2, {
-    message: "subcategory must be at least 2 characters.",
+  topic: z.string().min(2, {
+    message: "topic must be at least 2 characters.",
   }),
   campaignName: z.string().min(2, {
     message: "campaignname must be at least 2 characters.",
@@ -72,7 +72,7 @@ export default function CreateCampaign() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       category: "",
-      subcategory: "",
+      topic: "",
       campaignName: "",
       campaignUrl: "",
       items: [{ name: "", url: "" }],
@@ -87,7 +87,7 @@ export default function CreateCampaign() {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const result = await createListDb(data);
+    const result = await createListFromDb(data);
     if (result && result.errors) {
       // Handle validation errors
       console.error(result.errors);
@@ -141,7 +141,7 @@ export default function CreateCampaign() {
                 />
                 <FormField
                   control={form.control}
-                  name="subcategory"
+                  name="topic"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="p-2">Topic</FormLabel>
@@ -158,9 +158,9 @@ export default function CreateCampaign() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {subcategories.map((subcategory) => (
-                            <SelectItem key={subcategory} value={subcategory}>
-                              {subcategory}
+                          {topics.map((topic) => (
+                            <SelectItem key={topic} value={topic}>
+                              {topic}
                             </SelectItem>
                           ))}
                         </SelectContent>

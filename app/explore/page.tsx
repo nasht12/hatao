@@ -14,7 +14,7 @@ import { listenNowAlbums, madeForYouAlbums } from "./data/albums";
 import { playlists } from "./data/playlists";
 import Link from "next/link";
 import { generateSlug } from "@/lib/utils";
-import { fetchAllListDb } from '@/app/actions';
+import { fetchAllListFromDb } from '@/app/actions';
 
 interface Item {
   name: string;
@@ -23,7 +23,7 @@ interface Item {
 
 interface List {
   category: string;
-  subcategory: string;
+  topic: string;
   campaignName: string;
   campaignUrl: string;
   items: Item[];
@@ -33,11 +33,11 @@ export default function ExplorePage() {
   const [lists, setLists] = useState<List[]>([]);
 
   useEffect(() => {
-    fetchAllListDb()
+    fetchAllListFromDb()
       .then(items => {
         const lists: List[] = items.map((item) => ({
           category: item.category,
-          subcategory: item.subcategory,
+          topic: item.topic,
           campaignName: item.campaign_name,
           campaignUrl: item.campaign_url,
           items: item.items,
@@ -47,6 +47,8 @@ export default function ExplorePage() {
       })
       .catch(error => console.error(error));
   }, []);
+
+  console.log('lists', lists);
 
   return (
     <>
@@ -110,13 +112,13 @@ export default function ExplorePage() {
                                   key={list.campaignName}
                                   album={{
                                     name: list.campaignName,
-                                    artist: list.subcategory,
+                                    artist: list.topic,
                                     cover: list.campaignUrl,
                                   }}
                                   className="w-[250px]"
                                   aspectRatio="portrait"
-                                  width={250}
-                                  height={330}
+                                  width={300}
+                                  height={300}
                                 />
                               </Link>
                             ))}

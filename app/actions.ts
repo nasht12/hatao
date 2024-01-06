@@ -8,7 +8,7 @@ import { sql } from "@vercel/postgres";
 
 interface FormValues {
   category: string;
-  subcategory: string;
+  topic: string;
   campaignName: string;
   campaignUrl: string;
   items: { name: string; url: string }[];
@@ -23,7 +23,7 @@ type Campaign = FormValues;
 
 const schema = z.object({
   category: z.string(),
-  subcategory: z.string(),
+  topic: z.string(),
   campaignName: z.string(),
   campaignUrl: z.string(),
   items: z.array(
@@ -35,8 +35,8 @@ const schema = z.object({
 });
 
 
-export default async function createListDb(formData: FormValues) {
-    const { category, subcategory, campaignName, campaignUrl, items } = formData;
+export default async function createListFromDb(formData: FormValues) {
+    const { category, topic, campaignName, campaignUrl, items } = formData;
   
     try {
       // Check if the "lists" table exists, and if not, create it
@@ -44,7 +44,7 @@ export default async function createListDb(formData: FormValues) {
         CREATE TABLE IF NOT EXISTS lists (
           id SERIAL PRIMARY KEY,
           category VARCHAR(255),
-          subcategory VARCHAR(255),
+          topic VARCHAR(255),
           campaign_name VARCHAR(255),
           campaign_url VARCHAR(255),
           items JSONB
@@ -53,8 +53,8 @@ export default async function createListDb(formData: FormValues) {
   
       // Insert the form data into the "lists" table
       const result = await sql`
-        INSERT INTO lists (category, subcategory, campaign_name, campaign_url, items)
-        VALUES (${category}, ${subcategory}, ${campaignName}, ${campaignUrl}, ${JSON.stringify(items)})
+        INSERT INTO lists (category, topic, campaign_name, campaign_url, items)
+        VALUES (${category}, ${topic}, ${campaignName}, ${campaignUrl}, ${JSON.stringify(items)})
         RETURNING *;
       `;
   
@@ -65,9 +65,10 @@ export default async function createListDb(formData: FormValues) {
     }
   }
 
-export async function fetchAllListDb() {
+export async function fetchAllListFromDb() {
   try {
     const result = await sql`SELECT * FROM lists;`;
+    console.log('result55q', result.rows.length);
     return result.rows;
   } catch (error) {
     console.error(error);
@@ -75,18 +76,29 @@ export async function fetchAllListDb() {
   }
 }
 
-export async function fetchListDb(campaignName: string): Promise<Item[]> {
-    try {
-      const result = await sql`
+export async function fetchListFromDb(campaignName: string): Promise<Item[]> {
+  try {
+    const result = await sql`
         SELECT * FROM lists
         WHERE campaign_name = ${campaignName};
       `;
 
-      return result.rows.flatMap((row) => row.items);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    return result.rows.flatMap((row) => row.items);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function fetchTopicsFromDb() {
+  const { rows } = await sql`SELECT topic FROM lists;`;
+  console.log('rows', rows);
+  return rows;
+}
+
+export async function fetchCampaignNamesFromDb() {
+    const { rows } = await sql`SELECT DISTINCT campaign_name FROM lists;`;
+    return rows;
   }
 
 // export default async function createList(formData: FormValues) {

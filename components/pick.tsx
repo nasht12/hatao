@@ -11,7 +11,7 @@ interface PickProps {
 
 export default function Pick({ imageSrc }: PickProps) {
   return (
-    <div className="p-2 bg-gray-200 rounded-lg shadow-xl flex flex-col md:flex-row w-full md:w-120 h-160">
+    <div className="p-2 bg-gray-200 rounded-lg overflow-hidden shadow-xl flex flex-col md:flex-row w-full md:w-120">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -25,7 +25,7 @@ export default function Pick({ imageSrc }: PickProps) {
           height={300}
           alt="Image"
           className={cn(
-            "h-auto w-auto rounded-md object-cover transition-all hover:scale-102",
+            "h-96 w-auto rounded-md object-cover transition-all hover:scale-102",
             "aspect-[3/4]"
           )}
         />

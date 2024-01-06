@@ -1,6 +1,6 @@
-export type Subcategory = (typeof subcategories)[number]
+export type Topic = (typeof topics)[number]
 
-export const subcategories = [
+export const topics = [
   "Movies",
   "TV Shows",
   "Music",

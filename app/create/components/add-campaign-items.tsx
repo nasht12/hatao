@@ -38,7 +38,7 @@ type CampaignData = {
     // Define the shape of your campaign data here
     campaignName: string;
     category: string;
-    subcategory: string;
+    topic: string;
     items: string[];
   };
 
