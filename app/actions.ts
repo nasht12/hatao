@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { slugToNoSpace } from '@/lib/utils';
 import { sql } from "@vercel/postgres";
+import { revalidatePath } from 'next/cache'
 
 interface FormValues {
   category: string;
@@ -57,7 +58,7 @@ export default async function createListFromDb(formData: FormValues) {
         VALUES (${category}, ${topic}, ${campaignName}, ${campaignUrl}, ${JSON.stringify(items)})
         RETURNING *;
       `;
-  
+      revalidatePath('/')
       return result.rows[0];
     } catch (error) {
       console.error(error);
@@ -71,6 +72,32 @@ export async function fetchAllListFromDb() {
     console.log('result55q', result.rows.length);
     return result.rows;
   } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function fetchTopics(){
+  try {
+    const topics = [
+      'Movies',
+      'TV Shows',
+      'Music',
+      'Football',
+      'Basketball',
+      'Cities',
+      'Cuisines',
+      'Mobile Apps',
+      'Novels',
+      'Paintings',
+      'Animals'
+    ];
+    const topicsString = topics.map(topic => `'${topic}'`).join(', ');
+    const result = await sql`SELECT * FROM lists WHERE topic = ANY (SELECT topic FROM lists)`;
+    console.log("result res", result);
+    return result.rows;
+  }
+  catch (error) {
     console.error(error);
     throw error;
   }

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { sql } from '@vercel/postgres';
-import  {fetchAllListFromDb}  from '../actions';
+import  {fetchTopics}  from '../actions';
 
 interface ListItem {
     category: string;
@@ -17,16 +17,16 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     // Fetch topics from the database
-    const fetchLists = async () => {
+    const fetchListsDb = async () => {
         try {
-          const data = await fetchAllListFromDb();
+          const data = await fetchTopics();
           console.log("data", data);
           setListItems(
             data.map((row) => ({
               category: row.category,
               topic: row.topic,
-              campaignName: row.campaignName,
-              campaignUrl: row.campaignUrl,
+              campaignName: row.campaign_name,
+              campaignUrl: row.campaign_url,
               items: row.items,
             }))
           );
@@ -35,21 +35,19 @@ const Page: React.FC = () => {
         }
     };
 
-    fetchLists();
+    fetchListsDb();
 }, []);
 
   return (
     <div>
       <h1>List Page</h1>
-    {listItems.length > 0 ? (
+      {listItems && (
         <ul>
-            {listItems.map((item, index) => (
-                <li key={index}>{item.campaignName}</li>
-            ))}
+          {listItems.map((item, index) => (
+            <li key={index}>{item.campaignName}</li>
+          ))}
         </ul>
-    ) : (
-        <p>No items available</p>
-    )}
+      )}
     </div>
   );
 };
