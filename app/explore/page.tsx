@@ -15,7 +15,6 @@ import { playlists } from "./data/playlists";
 import Link from "next/link";
 import { generateSlug } from "@/lib/utils";
 import { fetchAllListFromDb, fetchTopics } from '@/app/actions';
-import { revalidatePath } from 'next/cache'
 
 interface Item {
   name: string;
@@ -25,8 +24,8 @@ interface Item {
 interface List {
   category: string;
   topic: string;
-  campaign_name: string;
-  campaign_url: string;
+  campaignName: string;
+  campaignUrl: string;
   items: Item[];
 }
 
@@ -36,21 +35,19 @@ export default function ExplorePage() {
   useEffect(() => {
     fetch("/api/lists")
       .then((response) => response.json())
-      .then((items) => {
-        const lists: List[] = items.map((item: List) => ({
+      .then((response) => {
+        const lists: List[] = response.data.map((item: List) => ({
           category: item.category,
           topic: item.topic,
-          campaign_name: item.campaign_name,
-          campaign_url: item.campaign_url,
+          campaignName: item.campaignName,
+          campaignUrl: item.campaignUrl,
           items: item.items,
         }));
-
+  
         setLists(lists);
       })
       .catch((error) => console.error(error));
   }, []);
-
-  console.log("lists", lists);
 
   return (
     <>
@@ -104,18 +101,18 @@ export default function ExplorePage() {
                           <div className="flex space-x-4 pb-4">
                             {lists.map((list) => (
                               <Link
-                                key={list.campaign_name}
+                                key={list.campaignName}
                                 href={`/lists/${generateSlug(
-                                  list.campaign_name
+                                  list.campaignName
                                 )}`}
                               >
                                 {" "}
                                 <AlbumArtwork
-                                  key={list.campaign_name}
+                                  key={list.campaignName}
                                   album={{
-                                    name: list.campaign_name,
+                                    name: list.campaignName,
                                     artist: list.topic,
-                                    cover: list.campaign_url,
+                                    cover: list.campaignUrl,
                                   }}
                                   className="w-[250px]"
                                   aspectRatio="portrait"

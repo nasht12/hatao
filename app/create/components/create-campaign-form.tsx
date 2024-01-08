@@ -86,17 +86,44 @@ export default function CreateCampaign() {
     name: "items",
   });
 
+  // const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  //   const result = await createListFromDb(data);
+  //   if (result && result.errors) {
+  //     // Handle validation errors
+  //     console.error(result.errors);
+  //   } else {
+  //     // Handle successful form submission
+  //     console.log("Form submitted successfully");
+  //     toast("Form submitted", {
+  //       description: "List created successfully.",
+  //     });
+  //   }
+  // };
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const result = await createListFromDb(data);
-    if (result && result.errors) {
-      // Handle validation errors
-      console.error(result.errors);
-    } else {
-      // Handle successful form submission
-      console.log("Form submitted successfully");
+    try {
+      const response: Response = await fetch('/api/lists', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        toast("Error", {
+          description: "Form not submitted.",
+        });
+        throw new Error('Network response was not ok');
+      }
+  
+      const result = await response.json();
+      console.log('Data:', result);
       toast("Form submitted", {
         description: "List created successfully.",
       });
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
