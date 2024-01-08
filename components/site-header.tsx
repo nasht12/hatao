@@ -30,7 +30,7 @@ export function SiteHeader() {
             </div>
           </div>
           <nav className="flex items-center">
-            <ModeToggle />
+            {/* <ModeToggle /> */}
           </nav>
         </div>
       </div>

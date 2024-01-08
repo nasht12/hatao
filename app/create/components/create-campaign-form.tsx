@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
 import * as z from "zod";
-
+import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -37,6 +37,7 @@ import { MinusIcon, PlusIcon, Cross2Icon, Cross1Icon } from "@radix-ui/react-ico
 import Image from "next/image";
 import createListFromDb from '../../actions';
 import { toast } from "sonner";
+import FormButton from "./form-button";
 
 const formSchema = z.object({
   category: z.string().min(2, {
@@ -60,6 +61,8 @@ const formSchema = z.object({
 });
 
 export default function CreateCampaign() {
+  const router = useRouter();
+
   const [campName, setCampName] = useState("");
   const [topic, setTopic] = useState('');
   const [isAddClicked, setIsAddClicked] = useState(false);
@@ -68,6 +71,7 @@ export default function CreateCampaign() {
   const [campUrl, setCampUrl] = useState("");
   const [selectedUrl, setSelectedUrl] = useState("");
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -79,7 +83,7 @@ export default function CreateCampaign() {
     },
   });
 
-  const { register, control, watch, handleSubmit } = form;
+  const { register, control, watch, handleSubmit, setError } = form;
 
   const { fields, append, prepend, remove } = useFieldArray({
     control: form.control,
@@ -101,29 +105,40 @@ export default function CreateCampaign() {
   // };
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    try {
-      const response: Response = await fetch('/api/lists', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+    if (data.items.length < 2) {
+      setError("items", {
+        type: "manual",
+        message: "At least 2 items are required"
       });
-  
-      if (!response.ok) {
-        toast("Error", {
-          description: "Form not submitted.",
+      toast("Error", {
+        description: "At least 2 items are required.",
+      });
+    } else {
+      try {
+        const response: Response = await fetch("/api/lists", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         });
-        throw new Error('Network response was not ok');
+
+        if (!response.ok) {
+          toast("Error", {
+            description: "Form not submitted.",
+          });
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await response.json();
+        console.log("Data:", result);
+        toast("Form submitted", {
+          description: "List created successfully.",
+        });
+        router.push("/explore");
+      } catch (error) {
+        console.error("Error:", error);
       }
-  
-      const result = await response.json();
-      console.log('Data:', result);
-      toast("Form submitted", {
-        description: "List created successfully.",
-      });
-    } catch (error) {
-      console.error('Error:', error);
     }
   };
 
@@ -367,13 +382,7 @@ export default function CreateCampaign() {
                     {/* Add */}
                   </Button>
 
-                  <Button
-                    type="submit"
-                    title="Create"
-                    className="hover:bg-green-200 text-white hover:text-black"
-                  >
-                    Create
-                  </Button>
+                  <FormButton />
                 </div>
               </>
             )}
