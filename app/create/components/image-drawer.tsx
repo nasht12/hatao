@@ -60,7 +60,7 @@ export const DrawerDemo: React.FC<DrawerDemoProps> = ({ inputText, onUrlSelect }
 
   useEffect(() => {
     searchPhotos();
-  }, [inputText]);
+  }, );
 
   return (
     <Drawer>

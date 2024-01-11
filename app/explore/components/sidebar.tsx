@@ -4,6 +4,7 @@ import { ScrollArea } from "../../../components/ui/scroll-area"
 
 import { Playlist } from "../data/playlists"
 import { Trends } from "../data/trending"
+import { Input } from "@/components/ui/input"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   playlists: Playlist[]
@@ -13,6 +14,13 @@ export function Sidebar({ className, playlists }: SidebarProps) {
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
+        <div className="mx-4 w-16">
+          <Input
+            type="search"
+            placeholder="Search..."
+            className="sm: w-[100] md:w-[100px] lg:w-[240px]"
+          />
+        </div>
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Discover
@@ -183,5 +191,5 @@ export function Sidebar({ className, playlists }: SidebarProps) {
         </div> */}
       </div>
     </div>
-  )
+  );
 }

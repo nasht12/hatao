@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import CreateCampaign from "./components/create-campaign-form";
-import { AddToCampaign } from "./components/add-campaign-items";
-import UseArrayFieldComponent from "./components/use-array-fields";
 
 function DemoContainer({
   className,

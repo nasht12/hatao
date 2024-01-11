@@ -20,7 +20,7 @@ export function SiteHeader() {
           </div>
         </Link>
         <div className="flex flex-1 items-center justify-between mx-2 space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
+          {/* <div className="w-full flex-1 md:w-auto md:flex-none">
             <div>
               <Input
                 type="search"
@@ -28,7 +28,7 @@ export function SiteHeader() {
                 className="sm: w-[100] md:w-[100px] lg:w-[240px]"
               />
             </div>
-          </div>
+          </div> */}
           <nav className="flex items-center">
             {/* <ModeToggle /> */}
           </nav>

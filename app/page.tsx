@@ -12,8 +12,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Announcement } from "@/components/announcement";
 
 export default function Home() {
-  const words = ['Create', 'Rank', 'Share']; 
-  const colors = ['text-red-200', 'text-green-200', 'text-blue-200']; 
+  const words = ['Movie', 'Song', 'Game', 'Book', 'City']; 
+  const colors = ['text-red-300', 'text-green-300', 'text-blue-300']; 
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [currentColor, setCurrentColor] = useState(colors[0]);
 
@@ -32,21 +32,23 @@ export default function Home() {
     }, 1000); // Change word and color every half second
 
     return () => clearInterval(intervalId); // Clean up on component unmount
-  }, []);
+  },);
   
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-row gap-4">
-        {/* <PicksDisplay /> */}
         <PageHeader>
-          {/* <Announcement /> */}
-          <PageHeaderHeading className="overflow-hidden flex text-sm">
-            <div
-              className={`underline transition-opacity duration-500 ease-in-out ${currentColor}`}
-            >
-              {currentWord}
+          <PageHeaderHeading className="overflow-hidden flex flex-col sm:flex-row text-sm">
+            <div className="flex items-center">
+              <div className="flex-none">
+                <p>Rank you favourite</p>
+              </div>
+              <div
+                className={`sm:w-20 md:w-40 ml-[-20px] my-2 flex-auto transition-all duration-500 ease-in-out ${currentColor}`}
+              >
+                <p>{currentWord}</p>
+              </div>
             </div>
-            {/* <div className='text-sm'>Lists</div> */}
           </PageHeaderHeading>
           <PageHeaderDescription>
             Trying to pick your favourite movie, or the best restaurants around?
